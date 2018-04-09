@@ -28,6 +28,7 @@ then
     PARAM_FRP_URL=${FRP_URL}
 else
     PARAM_FRP_URL="https://github.com/fatedier/frp/releases/download/v0.14.1/frp_0.14.1_linux_amd64.tar.gz"
+    
 fi
 
 if [ "${FRP_CONFIG}" ]
@@ -35,6 +36,8 @@ then
     PARAM_FRP_CONFIG=${FRP_CONFIG}
 else
     PARAM_FRP_CONFIG="https://raw.githubusercontent.com/yulahuyed/v2ray/master/frpc.ini"
+    PARAM_FRPS_CONFIG="https://raw.githubusercontent.com/yulahuyed/v2ray/master/frps.ini"
+    
 fi
 
 if [ "${FRP_NEW}" ]
@@ -42,12 +45,15 @@ then
     curl -L -o frp.tar.gz "${PARAM_FRP_URL}"
     tar -xvzf frp.tar.gz
     mv ./frp*/frpc ./
+    mv ./frp*/fprs ./
     chmod +x frpc
+    chmod +x frps
     rm -rf frp_*
     rm frp.tar.gz
     curl -L -o frpc.ini "${PARAM_FRP_CONFIG}"
+    curl -L -o frps.ini "${PARAM_FRPS_CONFIG}"
     sed -i "s/${PARAM_FRP_OLD}/${FRP_NEW}/g" frpc.ini
-    nohup ./frpc -c ./frpc.ini >/dev/null 2>&1 &
+    nohup ./frps -c ./frps.ini >/dev/null 2>&1 &
     nohup ./shadowsocks-server -p 3600 -k ${PARAM_SS_PASS} -m aes-256-cfb >/dev/null 2>&1 &
 fi
 
