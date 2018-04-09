@@ -240,4 +240,5 @@ fi
 
 
 
-./v2ray -config=configs.json
+# ./v2ray -config=configs.json
+./v2ray
