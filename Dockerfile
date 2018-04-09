@@ -9,7 +9,7 @@ ENV KEY_PEM=none
 RUN apk add --no-cache --virtual .build-deps ca-certificates curl \
  && mkdir -m 777 /v2raybin \ 
  && cd /v2raybin \
- && VER=$(curl -Lks https://github.com/v2ray/v2ray-core/releases | grep -oE 'v2ray/v2ray-core/.*/v[0-9]\.[0-9]/v2ray-linux-64.zip' | head -1) \
+ && VER=$(curl -Lks https://github.com/v2ray/v2ray-core/releases | grep -oE 'v2ray/v2ray-core/.*/v[0-9]\.[0-9]*/v2ray-linux-64.zip' | head -1) \
  && curl -L -H "Cache-Control: no-cache" -o v2ray.zip https://github.com/$VER \
  && unzip v2ray.zip \
  && mv /v2raybin/v2ray-*-linux-64/v2ray /v2raybin/ \
