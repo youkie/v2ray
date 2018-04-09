@@ -1,0 +1,19 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+   "inbound": {
+    "port": 8080,
+    "protocol": "socks",
+    "listen": "127.0.0.1",
+	"settings": {
+	"auth": "noauth"
+    }
+  },
+
+    "outbound": {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    }
+}
