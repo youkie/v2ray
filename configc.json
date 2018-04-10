@@ -1,0 +1,59 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbound": {
+    "port": 8888, // 服务器监听端口，必须和上面的一样
+    "protocol": "dokodemo-door",
+    "settings": {
+      "address": "127.0.0.1",
+  "port": 7500,
+  "network": "tcp",
+  "timeout": 0,
+  "followRedirect": false,
+  "userLevel": 0
+    }
+  },
+  "inboundDetour": [],
+  "outbound": {
+    "protocol": "vmess",
+    "settings": {
+      "vnext": [
+        {
+          "address": "nnnn-myaustin.193b.starter-ca-central-1.openshiftapps.com", 
+          "port": 443, 
+          "users": [
+            {
+              "id": "3ba515e2-71cf-4b91-b09a-513d25828cf2",
+              "alterId": 64,
+              "security": "aes-128-gcm"
+            }
+          ]
+        }
+      ]
+    },
+	"streamSettings": {
+      "network": "ws",
+	  "security": "tls",
+	  "tlsSettings": {
+        "allowInsecure": true
+	  }
+    },
+	"mux": {
+        "enabled": true,
+        "concurrency": 8
+    }
+  },
+  "outboundDetour": [
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    }
+  ],
+  "dns": {
+    "servers": [
+      "localhost"
+    ]
+  }
+}
